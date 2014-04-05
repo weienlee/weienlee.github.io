@@ -1,7 +1,6 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
     background-color: #DDDDDD;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -17,11 +16,10 @@ canvas {
     background-color: black;
     height:600px;
     width:1200px;
-    margin-top: 20px;
 }
 
 .canvas_wrapper {
-    margin:auto;
+    margin:20px auto 30px auto;
     height: 600px;
     width: 1200px;
     display:block;

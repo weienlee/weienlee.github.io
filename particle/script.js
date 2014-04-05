@@ -9,11 +9,61 @@ window.onload=function(){
     canvas.width = 1200;
     canvas.height = 600;
 
+    var paintX;
+    var paintY;
+    var mouseOut = false;
+
+    // disable right click on canvas
+    canvas.oncontextmenu = function (e) {
+        mouseup(e);
+        return false;
+    };
+
     $(canvas).on("mousemove", function(e) {
         if (e.which == 1) {
-            paintParticles(new Vector(e.offsetX, e.offsetY), 10, 15);
+            //paintParticles(new Vector(e.offsetX, e.offsetY), 10, 15);
+            paintX = e.offsetX;
+            paintY = e.offsetY;
         }
     });
+    
+
+    var mousedownID = -1;  //Global ID of mouse down interval
+    function mousedown(event) {
+        if(mousedownID==-1) { //Prevent multimple loops!
+            paintX = event.offsetX;
+            paintY = event.offsetY;
+            mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
+        }
+    }
+    function mouseup(event) {
+        if(mousedownID!=-1) {  //Only stop if exists
+            clearInterval(mousedownID);
+            mousedownID=-1;
+        }
+
+    }
+    function mouseout(event) {
+        mouseOut = true;
+    }
+    function mouseover(event) {
+        mouseOut = false;
+    }
+    function whilemousedown() {
+        /*here put your code*/
+        if (!mouseOut){
+            paintParticles(new Vector(paintX, paintY), 10, 15);
+        }
+    }
+    //Assign events
+    canvas.addEventListener("mousedown", mousedown);
+    canvas.addEventListener("mouseup", mouseup);
+    //Also clear the interval when user leaves the window with mouse
+    canvas.addEventListener("mouseout", mouseout);
+    canvas.addEventListener("mouseover", mouseover);
+    document.addEventListener("mouseup", mouseup);
+
+    
 
     function paintParticles(position, radius, number) {
         if (particles.length + number > maxParticles) return;
