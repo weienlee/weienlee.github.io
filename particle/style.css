@@ -1,0 +1,39 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    background-color: #DDDDDD;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+canvas {
+    margin:auto;
+    display: block;
+    background-color: black;
+    height:600px;
+    width:1200px;
+    margin-top: 20px;
+}
+
+.canvas_wrapper {
+    margin:auto;
+    height: 600px;
+    width: 1200px;
+    display:block;
+    position:relative;
+}
+
+#mode {
+    color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 15pt;
+    font-family: Helvetica;
+    text-transform: uppercase;
+}
