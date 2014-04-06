@@ -9,6 +9,13 @@ window.onload=function(){
     canvas.width = 1200;
     canvas.height = 600;
 
+    // global particle settings
+    var particles = [];
+    var particleSize = 2;
+    var maxParticles = 10000;
+    var g_accel = new Vector(0,0.1);
+    var g_vel = new Vector(0,0);
+
     var paintX;
     var paintY;
     var mouseOut = false;
@@ -72,7 +79,7 @@ window.onload=function(){
             var angle = Math.random() * Math.PI * 2;
             var pos = new Vector(position.x, position.y);
             pos.add(Vector.fromAngle(angle, magnitude));
-            particles.push(new Particle(pos, new Vector(0,0), new Vector(0,0.1)));
+            particles.push(new Particle(pos, new Vector(g_vel.x, g_vel.y), new Vector(g_accel.x, g_accel.y)));
         }
     }
 
@@ -152,14 +159,6 @@ window.onload=function(){
     };
 
 
-    // constants
-
-
-    var particles = [];
-    var maxParticles = 10000;
-    var particleSize = 1;
-
-
     // Add one emitter located at `{ x : 100, y : 230}` from the origin (top left)
     // that emits at a velocity of `2` shooting out from the right (angle `0`)
     //var emitters = [new Emitter(new Vector(100, 230), Vector.fromAngle(0, 2), Math.PI/8)];
@@ -216,6 +215,51 @@ window.onload=function(){
     }
 
 
+
+    // settings
+
+    $('#updateSettings').click(function() {
+
+        // update max particles
+        var max = parseInt(document.forms.settings.max.value);
+        if (!isNaN(max)) {
+            maxParticles = max;
+            $('#maxvalue').text(max);
+        } else {
+            document.forms.settings.max.value = "";
+        }
+        
+
+        // update acceleration
+        var aX = document.forms.settings.accelX.value;
+        var aY = document.forms.settings.accelY.value;
+        var accelX = 0.01 * parseFloat(aX);
+        var accelY = -0.01 * parseFloat(aY);
+        if (!isNaN(accelX) && !isNaN(accelY)) {
+            g_accel = new Vector(accelX, accelY);
+            for (var i=0; i<particles.length; i++) {
+                particles[i].acceleration = new Vector(accelX, accelY);
+            }
+            $('#accelvalue').text("<" + aX + "," + aY + ">");
+        } else {
+            document.forms.settings.accelX.value = "";
+            document.forms.settings.accelY.value = "";
+        }
+
+        // update initial velocity
+        var vX = document.forms.settings.velX.value;
+        var vY = document.forms.settings.velY.value;
+        var velX = 0.1 * parseFloat(vX);
+        var velY = -0.1 * parseFloat(vY);
+        if (!isNaN(velX) && !isNaN(velY)) {
+            g_vel = new Vector(velX, velY);
+            $('#velvalue').text("<" + vX + "," + vY + ">");
+        } else {
+            document.forms.settings.velX.value = "";
+            document.forms.settings.velY.value = "";
+        }
+
+    });
 
 
     // control flow

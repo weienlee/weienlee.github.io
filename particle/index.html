@@ -11,5 +11,39 @@
       <canvas>
       </canvas>
     </div>
+    <hr>
+    <div id="settings">
+      <h1>Settings | </h1><button type='button' id="updateSettings">update</button>
+      <form action="" name="settings">
+        <table>
+          <tr>
+            <td class="label">Max Particles:</td>
+            <td id="maxvalue" class="value" align="center">10000</td>
+            <td align="right">
+              <input type="text" name="max" id="max">
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="label">Acceleration:</td>
+            <td id="accelvalue" class="value" align="center"><0,-10></td>
+            <td align="right">
+              X: <input type="text" name="accelX" id="accelX">
+              Y: <input type="text" name="accelY" id="accelY">
+            </td>
+          </tr>
+
+          <tr>
+            <td class="label">Initial Velocity:</td>
+            <td id="velvalue" class="value" align="center"><0,0></td>
+            <td align="right">
+              X: <input type="text" name="velX" id="velX">
+              Y: <input type="text" name="velY" id="velY">
+            </td>
+          </tr>
+        </table>
+        
+      </form>
+    </div>
   </body>
 </html>
