@@ -1,5 +1,5 @@
 window.onload=function(){
-    var mode = "paint";
+    var mode = "fireworks";
 
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
@@ -13,12 +13,25 @@ window.onload=function(){
     var particles = [];
     var particleSize = 2;
     var maxParticles = 10000;
-    var g_accel = new Vector(0,0.1);
+    var g_accel = new Vector(0,0);
     var g_vel = new Vector(0,0);
 
     var paintX;
     var paintY;
     var mouseOut = false;
+
+    $(document).keypress(function(e) {
+        if(e.which == 112) { //p
+            mode = "paint";
+            $('#mode').text("paint");
+        } else if (e.which == 102) { // f
+            mode = "fireworks";
+            $('#mode').text("fireworks");
+        } else if (e.which == 97) { // a
+            mode = "attract";
+            $('#mode').text("attract");
+        };
+    });
 
     // disable right click on canvas
     canvas.oncontextmenu = function (e) {
@@ -40,13 +53,22 @@ window.onload=function(){
         if(mousedownID==-1) { //Prevent multimple loops!
             paintX = event.offsetX;
             paintY = event.offsetY;
-            mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
+            if (mode == "attract") {
+                mousedownID = setInterval(whilemousedown, 200 /*execute every 100ms*/);
+            } else {
+                mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
+            }
         }
     }
     function mouseup(event) {
         if(mousedownID!=-1) {  //Only stop if exists
             clearInterval(mousedownID);
             mousedownID=-1;
+            if (mode == "attract") {
+                for (var i=0; i<particles.length; i++) {
+                    particles[i].acceleration = g_accel;
+                }
+            }
         }
 
     }
@@ -60,6 +82,7 @@ window.onload=function(){
         /*here put your code*/
         if (!mouseOut){
             paintParticles(new Vector(paintX, paintY), 10, 15);
+            attract(paintX, paintY);
         }
     }
     //Assign events
@@ -79,10 +102,23 @@ window.onload=function(){
             var angle = Math.random() * Math.PI * 2;
             var pos = new Vector(position.x, position.y);
             pos.add(Vector.fromAngle(angle, magnitude));
-            particles.push(new Particle(pos, new Vector(g_vel.x, g_vel.y), new Vector(g_accel.x, g_accel.y)));
+            if (mode=="paint") {
+                particles.push(new Particle(pos, new Vector(g_vel.x, g_vel.y), new Vector(g_accel.x, g_accel.y)));
+            } else if (mode=="fireworks") {
+                var a = Math.random()*Math.PI*2;
+                var m = Math.random() * 1;
+                particles.push(new Particle(pos, Vector.fromAngle(a, m), new Vector(g_accel.x, g_accel.y)));
+            }
         }
     }
 
+    function attract(x, y) {
+        if (mode=="attract") {
+            for (var i=0; i<particles.length; i++) {
+                particles[i].submitToFields(x, y, 1000);
+            }
+        }
+    }
 
     // Vectors
 
@@ -130,6 +166,29 @@ window.onload=function(){
         this.position.add(this.velocity);
     };
 
+    Particle.prototype.submitToFields = function (x,y, mass) {
+        // our starting acceleration this frame
+        var totalAccelerationX = 0;
+        var totalAccelerationY = 0;
+        
+        // find the distance between the particle and the field
+        var vectorX = x - this.position.x;
+        var vectorY = y - this.position.y;
+        
+        var force = mass/Math.pow(vectorX*vectorX+vectorY*vectorY,1.4);
+        
+
+        totalAccelerationX += vectorX * force;
+        totalAccelerationY += vectorY * force;
+        
+        this.acceleration = new Vector(totalAccelerationX, totalAccelerationY);
+        
+        var dist = Math.pow(vectorX*vectorX+vectorY*vectorY,0.5);
+        if (dist<100) {
+            this.acceleration = new Vector(0,0);
+            this.velocity = new Vector(vectorX*dist/100000,vectorY*dist/100000);
+        }
+    };
 
 
     // Emitters
@@ -179,6 +238,23 @@ window.onload=function(){
         }
     }
 
+
+    // Fields
+
+    function Field(point, mass) {
+        this.position = point;
+        this.setMass(mass);
+    }
+
+    Field.prototype.setMass = function(mass) {
+        this.mass = mass || 100;
+        this.drawColor = mass < 0 ? "#f00" : "#0f0";
+    };
+ 
+    
+
+
+
     function plotParticles(boundsX, boundsY) {
         // a new array to hold particles within our bounds
         var currentParticles = [];
@@ -199,6 +275,7 @@ window.onload=function(){
         
         // Update our global particles, clearing room for old particles to be collected
         particles = currentParticles;
+        $('#count').text(particles.length);
     }
     
     function drawParticles() {
