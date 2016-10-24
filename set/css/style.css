@@ -1,0 +1,79 @@
+body {
+  margin: 20px;
+  background-color: #eee;
+  user-select: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+button {
+  border: none;
+  background-color: #fff;
+  font-size: 16px;
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+button:focus {
+  outline: none;
+}
+
+.game {
+  background-color: #eee;
+  width: 80%;
+  padding-bottom: 1.5%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card {
+  width: 22.5%;
+  background-color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin: 2% 0 0 2%;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 2%;
+  text-align: center;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.symbol {
+  width: 26%;
+  margin: 0 1%;
+  height: 0;
+  padding-bottom:53%;
+  display: inline-block;
+  vertical-align: top;
+  background-size: 100% 100%;
+}
+
+.selected {
+  background-color: #ddd;
+  box-shadow: 5px 5px 10px #888888
+}
+
+.menu {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  margin-left: -4px;
+  padding: 1.6%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.time {
+  padding: 5%;
+  font-size: 24px;
+
+}
