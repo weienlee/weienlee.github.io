@@ -81,9 +81,10 @@ Game.prototype.dealCards = function() {
     // replace set with new cards
 
     // sort so that we splice in reverse order
-    this.selectedCards.sort();
-    this.selectedCards.reverse();
-  
+    this.selectedCards.sort(function(a, b) {
+      return b - a;
+    });
+    
     for (var i=0; i<3; i++) {
       if (i<cards.length && this.currentCards.length <= 12) {
         this.currentCards[this.selectedCards[i]] = cards[i];
