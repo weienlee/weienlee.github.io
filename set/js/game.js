@@ -58,7 +58,12 @@ Game.prototype.toggleCard = function(position) {
     } else {
       // TODO: handle incorrect set
       this.selectedCards.length = 0;
+      $('.selected').addClass('incorrect');
       $('.selected').removeClass('selected');
+      setTimeout(function(){
+          $('.incorrect').removeClass('incorrect');
+      }, 250);
+      
     }
   }
 }
@@ -107,9 +112,7 @@ Game.prototype.dealCards = function() {
     Array.prototype.push.apply(this.currentCards, cards);
   }
 
-  console.log("deck has " + this.deck.cards.length + " cards left")
-  console.log("noSet", this.noSet());
-  if (this.deckSize <= 3 && this.noSet()) {
+  if (this.deckSize < 3 && this.noSet()) {
     this.gameOver();
   }
 
@@ -157,9 +160,12 @@ Game.prototype.checkNoSet = function() {
   if (this.noSet()) {
     this.dealCards();
   } else {
-    // TODO: visually show no set
-    this.time += 10;
-    $('.time').html(getTimeString(this.time));
+      $('.time').css('color', 'red')
+      setTimeout(function(){
+          $('.time').css('color', 'black');
+      }, 300);
+      this.time += 10;
+      $('.time').html(getTimeString(this.time));
   }
 }
 

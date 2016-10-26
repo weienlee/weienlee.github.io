@@ -68,6 +68,10 @@ button:focus {
   background-color: #BFD6E0;
 }
 
+.incorrect {
+  background-color: #FFC6B7;
+}
+
 .menu {
   display: inline-block;
   vertical-align: top;
