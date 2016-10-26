@@ -27,6 +27,7 @@ Game.prototype.init = function() {
 }
 
 Game.prototype.draw = function() {
+  $('.card').remove();
   for (var i=0; i<this.currentCards.length; i++) {
     let card = this.currentCards[i];
     let cardDiv = $('<div class="card"></div>');
@@ -75,6 +76,7 @@ Game.prototype.checkSet = function() {
 }
 
 Game.prototype.dealCards = function() {
+  this.deckSize -= 3;
   let cards = this.deck.dealCards(3);
 
   if (this.selectedCards.length === 3) {
@@ -99,10 +101,25 @@ Game.prototype.dealCards = function() {
     Array.prototype.push.apply(this.currentCards, cards);
   }
 
+  console.log("deck has " + this.deck.cards.length + " cards left")
+  console.log("noSet", this.noSet());
+  if (this.deckSize <= 3 && this.noSet()) {
+    this.gameOver();
+  }
+
   // redraw board with new cards
-  $('.card').remove();
   this.draw();
 }
+
+Game.prototype.gameOver = function() {
+  $('.blanket').show();
+  $('.gameover').show();
+  let seconds = this.time;
+  score = getTimeString(seconds);
+  $('.score').html("FINAL TIME: " + score);
+}
+
+
 
 Game.prototype.thirdCardBits = function(card1, card2) {
   let x = card1.getBits();

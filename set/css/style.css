@@ -1,6 +1,5 @@
 body {
-  margin: 20px;
-  background-color: #eee;
+  background-color: #e6f0f5;
   user-select: none;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
@@ -18,7 +17,7 @@ button {
 }
 
 button:hover {
-  background-color: #ddd;
+  background-color: #f3f3f3;
 }
 
 button:focus {
@@ -26,7 +25,7 @@ button:focus {
 }
 
 .game {
-  background-color: #eee;
+  background-color: #e6f0f5;
   width: 80%;
   padding-bottom: 1.5%;
   display: inline-block;
@@ -44,7 +43,7 @@ button:focus {
   padding: 2%;
   text-align: center;
   transition: all 0.3s ease;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .symbol {
@@ -58,8 +57,7 @@ button:focus {
 }
 
 .selected {
-  background-color: #ddd;
-  box-shadow: 5px 5px 10px #888888
+  background-color: #BFD6E0;
 }
 
 .menu {
@@ -72,8 +70,50 @@ button:focus {
   text-align: center;
 }
 
+.blanket {
+  margin: -10px;
+  display: none;
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  border: 1px solid black;
+  z-index: 2;
+}
+
+.gameover {
+  padding: 10px;
+  border: 3px solid white;
+  border-radius: 7px;
+  font-size: 30px;
+  display: none;
+  text-align: center;
+  background-color: black;
+  margin: 10% 30% 0 30%;
+  position: relative;
+  width: 40%;
+  height: 50%;
+  opacity: 1;
+  color: white;
+}
+
+
 .time {
   padding: 5%;
   font-size: 24px;
 
+}
+
+.restart {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.restart:hover {
+  background-color: #e6f0f5;
+  color: #5483c9;
 }

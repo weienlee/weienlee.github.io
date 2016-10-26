@@ -12,4 +12,11 @@ $(function() {
   $(document).on('click', '.noset', function(event) {
     game.checkNoSet();
   })
+
+  $(document).on('click', '.restart', function(event) {
+    $('.blanket').hide();
+    $('.gameover').hide();
+    game.init();
+
+  })
 });
