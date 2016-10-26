@@ -10,6 +10,7 @@ var Deck = function() {
       }
   }
   shuffle(this.cards);
+  //this.cards.splice(15);
 };
 
 Deck.prototype.genCSS = function() {

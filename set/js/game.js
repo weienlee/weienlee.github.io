@@ -8,6 +8,7 @@ var Game = function(container) {
   this.selectedCards = [];
   this.div = container;
   this.time = 0;
+  this.game_state = "playing";
 };
 
 Game.prototype.init = function() {
@@ -77,6 +78,11 @@ Game.prototype.checkSet = function() {
 
 Game.prototype.dealCards = function() {
   this.deckSize -= 3;
+  if (this.deckSize < 0) {
+    this.deckSize = 0;
+  }
+
+  $('.card-count').html("Cards left: " + this.deckSize);
   let cards = this.deck.dealCards(3);
 
   if (this.selectedCards.length === 3) {
@@ -112,6 +118,7 @@ Game.prototype.dealCards = function() {
 }
 
 Game.prototype.gameOver = function() {
+  clearInterval(this.interval);
   $('.blanket').show();
   $('.gameover').show();
   let seconds = this.time;
@@ -154,6 +161,23 @@ Game.prototype.checkNoSet = function() {
     this.time += 10;
     $('.time').html(getTimeString(this.time));
   }
+}
+
+Game.prototype.getGameState = function() {
+  return this.game_state;
+}
+
+Game.prototype.pauseTime = function() {
+  clearInterval(this.interval);
+  this.game_state = "paused";
+}
+
+Game.prototype.resumeTime = function() {
+  this.game_state = "playing";
+  var that = this;
+  this.interval = setInterval(function(){
+    $('.time').html(getTimeString(that.updateTime()));
+  }, 1000);
 }
 
 Game.prototype.updateTime = function() {

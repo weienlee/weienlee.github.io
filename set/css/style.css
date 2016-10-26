@@ -24,6 +24,14 @@ button:focus {
   outline: none;
 }
 
+.menu-button {
+  margin: 0 0 7px 0;
+}
+
+.menu-button:hover {
+  background-color: #BFD6E0;
+}
+
 .game {
   background-color: #e6f0f5;
   width: 80%;
@@ -93,7 +101,7 @@ button:focus {
   margin: 10% 30% 0 30%;
   position: relative;
   width: 40%;
-  height: 50%;
+  height: 35%;
   opacity: 1;
   color: white;
 }
@@ -105,7 +113,7 @@ button:focus {
 
 }
 
-.restart {
+.play-again {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -113,7 +121,7 @@ button:focus {
   font-weight: 300;
 }
 
-.restart:hover {
+.play-again:hover {
   background-color: #e6f0f5;
   color: #5483c9;
 }
