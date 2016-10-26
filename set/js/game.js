@@ -174,6 +174,7 @@ Game.prototype.pauseTime = function() {
 
 Game.prototype.resumeTime = function() {
   this.game_state = "playing";
+  clearInterval(this.interval);
   var that = this;
   this.interval = setInterval(function(){
     $('.time').html(getTimeString(that.updateTime()));

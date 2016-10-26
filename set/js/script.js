@@ -13,11 +13,25 @@ $(function() {
     game.checkNoSet();
   })
 
+  $(document).on('click', '.pause', function(event) {
+    console.log("before pausing", game.getGameState());
+    $('.paused-time').html(getTimeString(game.time));
+    $('.pause-blanket').show();
+    game.pauseTime();
+    console.log("after pausing", game.getGameState());
+  })
+
+  $(document).on('click', '.resume', function(event) {
+    $('.pause-blanket').hide();
+    game.resumeTime();
+  })
+
   $(document).on('visibilitychange', function(event) {
-    if (document.hidden) {
+    console.log("before visibility change", game.getGameState());
+    if (document.hidden && game.getGameState() == "playing") {
       game.pauseTime();
     }
-    else {
+    if (document.hidden == false && game.getGameState() == "paused") {
       game.resumeTime();
     }
   })

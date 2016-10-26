@@ -78,6 +78,18 @@ button:focus {
   text-align: center;
 }
 
+.pause-blanket {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  display: none;
+  margin: -8px;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #8CAEBF;
+}
+
 .blanket {
   margin: -10px;
   display: none;
@@ -111,6 +123,34 @@ button:focus {
   padding: 5%;
   font-size: 24px;
 
+}
+
+.card-count {
+  margin: 0 0 20px 0;
+}
+
+.resume:hover {
+  color: #47426f;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.paused-time {
+  font-size: 40px;
+  margin-top: 10px;
+}
+
+.resume {
+  transition: all 0.3s ease;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 20%;
+  padding: 15px;
+  width: 200px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  border: 2px solid #8CAEBF;
 }
 
 .play-again {
