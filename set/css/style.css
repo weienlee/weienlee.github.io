@@ -3,6 +3,7 @@ body {
   user-select: none;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
+  margin: 0;
 }
 
 button {
@@ -24,31 +25,34 @@ button:focus {
   outline: none;
 }
 
-.menu-button {
-  margin: 0 0 7px 0;
-}
-
-.menu-button:hover {
-  background-color: #BFD6E0;
-}
-
 .game {
   background-color: #e6f0f5;
-  width: 80%;
-  padding-bottom: 1.5%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+.column {
+  width: 17.6%;
+  margin: 2% 0 0 2%;
+  display: inline-block;
+  vertical-align: top;
+  transition: all 0.3s ease;
+}
+
+.column:last-child {
+  margin-right: 2%;
 }
 
 .card {
-  width: 22.5%;
+  width: 100%;
   background-color: #fff;
-  display: inline-block;
-  vertical-align: top;
-  margin: 2% 0 0 2%;
   cursor: pointer;
   box-sizing: border-box;
-  padding: 2%;
+  padding: 10%;
+  margin-bottom: 10%;
   text-align: center;
   transition: all 0.3s ease;
   border-radius: 5px;
@@ -73,13 +77,27 @@ button:focus {
 }
 
 .menu {
-  display: inline-block;
   vertical-align: top;
-  width: 20%;
-  margin-left: -4px;
-  padding: 1.6%;
   box-sizing: border-box;
+}
+
+.menu-block {
+  float: left;
+  width: 17.6%;
+  margin: 0 0 0 2%;
   text-align: center;
+}
+
+.menu-block button {
+  margin-top: 5%;
+}
+
+.menu-button {
+  margin: 0 0 7px 0;
+}
+
+.menu-button:hover {
+  background-color: #BFD6E0;
 }
 
 .pause-blanket {
@@ -87,7 +105,6 @@ button:focus {
   text-align: center;
   color: white;
   display: none;
-  margin: -8px;
   position:absolute;
   width: 100%;
   height: 100%;
@@ -95,7 +112,6 @@ button:focus {
 }
 
 .blanket {
-  margin: -10px;
   display: none;
   position: absolute;
   background-color: black;

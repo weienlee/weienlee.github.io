@@ -28,7 +28,8 @@ Game.prototype.init = function() {
 }
 
 Game.prototype.draw = function() {
-  $('.card').remove();
+  $('.column').remove();
+  let column = $('<div class="column"></div>');
   for (var i=0; i<this.currentCards.length; i++) {
     let card = this.currentCards[i];
     let cardDiv = $('<div class="card"></div>');
@@ -38,7 +39,11 @@ Game.prototype.draw = function() {
       cardDiv.append(symbol);
     }
     cardDiv.data('position', i);
-    this.div.append(cardDiv);
+    column.append(cardDiv);
+    if (i % 3 == 2) {
+      this.div.append(column);
+      column = $('<div class="column"></div>');
+    }
   }
 }
 
@@ -63,7 +68,7 @@ Game.prototype.toggleCard = function(position) {
       setTimeout(function(){
           $('.incorrect').removeClass('incorrect');
       }, 250);
-      
+
     }
   }
 }
@@ -97,7 +102,7 @@ Game.prototype.dealCards = function() {
     this.selectedCards.sort(function(a, b) {
       return b - a;
     });
-    
+
     for (var i=0; i<3; i++) {
       if (i<cards.length && this.currentCards.length <= 12) {
         this.currentCards[this.selectedCards[i]] = cards[i];
