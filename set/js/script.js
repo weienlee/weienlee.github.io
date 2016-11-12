@@ -11,7 +11,7 @@ $(function() {
 
   $(document).on('click', '.noset', function(event) {
     game.checkNoSet();
-  })
+  });
 
   $(document).on('click', '.pause', function(event) {
     console.log("before pausing", game.getGameState());
@@ -19,12 +19,12 @@ $(function() {
     $('.pause-blanket').show();
     game.pauseTime();
     console.log("after pausing", game.getGameState());
-  })
+  });
 
   $(document).on('click', '.resume', function(event) {
     $('.pause-blanket').hide();
     game.resumeTime();
-  })
+  });
 
   $(document).on('visibilitychange', function(event) {
     console.log("before visibility change", game.getGameState());
@@ -34,7 +34,7 @@ $(function() {
     if (document.hidden == false && game.getGameState() == "paused") {
       game.resumeTime();
     }
-  })
+  });
 
   $(document).on('click', '.restart', function(event) {
     $('.time').html("00:00");
@@ -43,5 +43,6 @@ $(function() {
     $('.card-count').html("Cards left: 69");
     game.init();
 
-  })
+  });
+
 });
