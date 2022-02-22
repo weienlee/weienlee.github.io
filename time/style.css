@@ -1,0 +1,64 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #822EFF;
+  color: white;
+  margin: 0;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+}
+
+table {
+  border-spacing: 15px 10px;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#time {
+  font-size: 50pt;
+}
+
+#day, #date {
+  font-size: 20pt;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.clock {
+  padding: 50px 0;
+}
+
+.options {
+  margin: auto;
+  padding: 30px 0;
+}
+
+.label {
+  line-height: 28px;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+  display: flex;
+  padding: 1px;
+	width: 29px;
+	height: 29px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
