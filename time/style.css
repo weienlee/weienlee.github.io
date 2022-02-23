@@ -50,8 +50,10 @@ table {
 
 input[type="color"] {
 	-webkit-appearance: none;
+  -webkit-border-radius: 0px;
 	border: none;
   display: flex;
+  font-size: 16px;
   padding: 1px;
 	width: 29px;
 	height: 29px;
